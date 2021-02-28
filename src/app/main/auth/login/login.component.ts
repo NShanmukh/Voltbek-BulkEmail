@@ -5,7 +5,7 @@ import { fuseAnimations } from '@fuse/animations';
 import { FuseConfigService } from '@fuse/services/config.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
   encapsulation: ViewEncapsulation.None,

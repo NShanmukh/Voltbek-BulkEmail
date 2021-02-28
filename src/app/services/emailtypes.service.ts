@@ -24,4 +24,18 @@ export class EmailtypesService {
       return data;
     }));
   }
+
+  getEmailContentDocs(type: string, tdsId: any) {
+    return this.http.get(this.baseUrl + environment.apiEndPoints.getAllEmailDocsByType + '/' + type + '/' + tdsId).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.getAllEmailDocsByType);
+      return data;
+    }));
+  }
+
+  deleteEmailDocs(tdsId) {
+    return this.http.get(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType + '/' + tdsId).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType);
+      return data;
+    }));
+  }
 }

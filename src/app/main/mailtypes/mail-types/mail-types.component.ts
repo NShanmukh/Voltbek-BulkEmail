@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { UploadFileDialogComponent } from 'app/main/dialogs/upload-file-dialog/upload-file-dialog.component';
 import { EmailtypesService } from 'app/services/emailtypes.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 
@@ -13,6 +14,8 @@ import { SnackbarService } from 'app/services/snackbar.service';
 
 export class MailTypesComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
+  dialogRef: MatDialogRef<UploadFileDialogComponent>;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   displayedColumns = ['EmailType', 'FromAdd', 'Subject', 'createdOn', 'actions'];
@@ -52,7 +55,7 @@ export class MailTypesComponent implements OnInit {
     }
   ]
 
-  constructor(private emailService: EmailtypesService, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService) {
+  constructor(private emailService: EmailtypesService, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService, private dialog: MatDialog) {
     this.dataSource = new MatTableDataSource(this.mailContentTypes);
     this.dataSource.sort = this.sort;
   }
@@ -78,9 +81,18 @@ export class MailTypesComponent implements OnInit {
       this.snackBar.errorPopup('Error occured, Please try again!')
     });
   }
+
   applyFilter(filterValue) {
     this.dataSource.filter = filterValue;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+  }
+
+  openConfirmationDialog(type: string, recId: any) {
+    this.dialogRef = this.dialog.open(UploadFileDialogComponent, {
+      disableClose: true
+    });
+    this.dialogRef.componentInstance.fileType = type;
+    this.dialogRef.componentInstance.tdsId = recId;
   }
 }

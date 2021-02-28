@@ -32,9 +32,10 @@ login {
 
       .img-holder .bg {
         opacity: 1;
-        background-image: url("assets/ui-images/4888.jpg");
+        background-image: url("assets/ui-images/bg.png");
         background-repeat: no-repeat;
         height: 99vh;
+        background-size: 100%;
       }
 
       @include media-breakpoint("sm") {

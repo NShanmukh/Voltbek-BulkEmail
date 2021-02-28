@@ -21,6 +21,8 @@ import { LoginComponent } from './main/auth/login/login.component';
 import { MaterialModule } from '@fuse/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { UploadFileDialogComponent } from './main/dialogs/upload-file-dialog/upload-file-dialog.component';
+import { PopupDialogComponent } from './main/dialogs/popup-dialog/popup-dialog.component';
 
 const appRoutes: Routes = [
     {
@@ -41,7 +43,9 @@ const appRoutes: Routes = [
 @NgModule({
     declarations: [
         AppComponent,
-        LoginComponent
+        LoginComponent,
+        UploadFileDialogComponent,
+        PopupDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -72,6 +76,9 @@ const appRoutes: Routes = [
 
         // App modules
         LayoutModule
+    ],
+    entryComponents: [
+        UploadFileDialogComponent
     ],
     bootstrap: [
         AppComponent

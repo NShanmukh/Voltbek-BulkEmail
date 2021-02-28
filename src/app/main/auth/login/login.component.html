@@ -4,7 +4,7 @@
       <div class="img-holder">
         <div class="bg" fxFlex.md="90">
           <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
-            <img class="logo-size" src="assets/ui-images/voltas_logo_white.png" alt="">
+            <img class="logo-size" src="assets/ui-images/logo.png" alt="">
           </div>
         </div>
       </div>
@@ -19,10 +19,7 @@
       <div>
         <div fxLayout="column" class="title font-weight-700">
           <span style="margin-bottom: 2px; font-weight: 100; font-size: 28px;"> WELCOME TO </span>
-          <div fxLayout="row">
-            <span style="color: #002a75;font-size: 24px;">VOLTAS </span>&nbsp; <span
-              style="color: #bdbdbd; font-size: 24px;">|</span> &nbsp;
-            <span style="color: #00bbbe; font-size: 24px;"> VENDOR PORTAL</span>
+          <div fxLayout="row"> <span style="color: #00bbbe; font-size: 24px;"> TDS MAIL PORTAL</span>
           </div>
         </div>
         <!-- <br /> -->
@@ -36,7 +33,6 @@
           <mat-form-field appearance="outline">
             <mat-label>Username</mat-label>
             <input matInput formControlName="userName">
-            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
             <mat-error *ngIf="loginForm.get('userName').hasError('required')">
               Username is required
             </mat-error>
@@ -44,10 +40,7 @@
 
           <mat-form-field appearance="outline">
             <mat-label>Password</mat-label>
-            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-            <button mat-icon-button matSuffix>
-              <mat-icon (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">            
             <mat-error>
               Password is required
             </mat-error>
