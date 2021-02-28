@@ -74,3 +74,30 @@
 ::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
     top: 0em !important;
 }
+
+::ng-deep .sucess-snackbar {
+    background: #1dac29 !important;
+    color: #fff !important;
+}
+
+::ng-deep .sucess-snackbar .mat-button-wrapper {
+    color: #fff !important;
+}
+
+::ng-deep .warn-snackbar {
+    background: #fb8c00 !important;
+    color: #fff !important;
+}
+
+::ng-deep .warn-snackbar .mat-button-wrapper {
+    color: #fff !important;
+}
+
+::ng-deep .error-snackbar {
+    background: #d60d0d !important;
+    color: #fff !important;
+}
+
+::ng-deep .error-snackbar .mat-button-wrapper {
+    color: #fff !important;
+}

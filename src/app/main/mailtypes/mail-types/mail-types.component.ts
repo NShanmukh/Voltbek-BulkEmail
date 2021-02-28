@@ -1,14 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { QuillEditorComponent } from 'ngx-quill';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { EmailtypesService } from 'app/services/emailtypes.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @Component({
   selector: 'app-mail-types',
   templateUrl: './mail-types.component.html',
   styleUrls: ['./mail-types.component.scss']
 })
+
 export class MailTypesComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -50,16 +52,35 @@ export class MailTypesComponent implements OnInit {
     }
   ]
 
-  @ViewChild('editor') editor: QuillEditorComponent
-  constructor(private fb: FormBuilder) {
+  constructor(private emailService: EmailtypesService, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService) {
     this.dataSource = new MatTableDataSource(this.mailContentTypes);
     this.dataSource.sort = this.sort;
   }
 
   ngOnInit(): void {
+    this.getEmailContentTypes();
   }
 
+  getEmailContentTypes() {
+    this.loaderService.show();
+    this.emailService.getEmailContentTypes().subscribe((data: any) => {
+      if (data.success) {
+        if (data.result) {
+          this.loaderService.hide();
+          this.dataSource = new MatTableDataSource(data.result);
+        }
+      } else {
+        this.loaderService.hide();
+        this.snackBar.errorPopup('Error occured, Please try again!')
+      }
+    }, err => {
+      this.loaderService.hide();
+      this.snackBar.errorPopup('Error occured, Please try again!')
+    });
+  }
   applyFilter(filterValue) {
-
+    this.dataSource.filter = filterValue;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { FormGroup } from '@angular/forms/src/model';
+import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { EmailtypesService } from 'app/services/emailtypes.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 import { QuillEditorComponent } from 'ngx-quill';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
@@ -14,16 +17,16 @@ export class MailTypesCreateComponent implements OnInit {
   hide = false;
 
   @ViewChild('editor') editor: QuillEditorComponent
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private snackBar: SnackbarService, private emailService: EmailtypesService, private loaderService: FuseSplashScreenService) { }
 
   ngOnInit() {
 
     this.form = this.fb.group({
-      tdsTitle: ['TDSMail'],
-      tdsSubject: [''],
-      tdsEmailFrom: [''],
-      tdsEmailCc: [''],
-      tdsEmailBody: ['']
+      tdsTitle: ['TDSMail', Validators.required],
+      tdsSubject: ['', Validators.required],
+      tdsEmailFrom: ['', Validators.required],
+      tdsEmailCc: ['', Validators.required],
+      tdsEmailBody: ['', Validators.required]
     });
     this.form
       .controls
@@ -51,4 +54,27 @@ export class MailTypesCreateComponent implements OnInit {
     this.form.controls['editor'].patchValue(`${this.form.controls['editor'].value} patched!`)
   }
 
+  onEmailBodySumit() {
+    debugger
+    this.loaderService.show();
+    if (this.form.invalid) {
+      this.snackBar.errorPopup('Please fill all mandatory fields');
+      this.loaderService.hide();
+      return;
+    }
+    this.emailService.createEmailContentTypes(this.form.value).subscribe((data: any) => {
+      if (data.success) {
+        if (data.result) {
+          this.loaderService.hide();
+          this.snackBar.successPopup('Email content saved successfully', ['/mailTypes/mailTypes'])
+        }
+      } else {
+        this.loaderService.hide();
+        this.snackBar.errorPopup('Error occured, Please try again!')
+      }
+    }, err => {
+      this.loaderService.hide();
+      this.snackBar.errorPopup('Error occured, Please try again!')
+    });
+  }
 }
