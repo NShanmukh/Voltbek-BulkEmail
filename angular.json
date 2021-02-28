@@ -27,7 +27,9 @@
                             "src/assets"
                         ],
                         "styles": [
-                            "src/styles.scss"
+                            "src/styles.scss",
+                            "src/quill.snow.css",
+                            "src/quill.bubble.css"
                         ],
                         "scripts": [],
                         "showCircularDependencies": false

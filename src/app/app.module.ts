@@ -16,21 +16,31 @@ import { fuseConfig } from 'app/fuse-config';
 
 import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
-import { SampleModule } from 'app/main/sample/sample.module';
 import { QuillModule } from 'ngx-quill';
+import { LoginComponent } from './main/auth/login/login.component';
 
 const appRoutes: Routes = [
     {
-        path      : '**',
-        redirectTo: 'sample'
+        path: '',
+        redirectTo: 'auth/login',
+        pathMatch: 'full',
+    },
+    {
+        path: 'auth/login',
+        component: LoginComponent,
+    },
+    {
+        path: 'mailTypes',
+        loadChildren: './main/mailtypes/mailtypes.module#MailtypesModule',
     }
 ];
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        LoginComponent
     ],
-    imports     : [
+    imports: [
         BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
@@ -47,19 +57,18 @@ const appRoutes: Routes = [
 
         // Fuse modules
         FuseModule.forRoot(fuseConfig),
+        QuillModule.forRoot(),
         FuseProgressBarModule,
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
 
         // App modules
-        LayoutModule,
-        SampleModule
+        LayoutModule
     ],
-    bootstrap   : [
+    bootstrap: [
         AppComponent
     ]
 })
-export class AppModule
-{
+export class AppModule {
 }
