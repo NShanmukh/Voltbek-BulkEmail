@@ -2,7 +2,7 @@ export const environment = {
     production: true,
     hmr       : false,
     
-    apiURL: 'https://vserveq.voltasworld.com/bmsserver/api',
+    apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
 
     apiEndPoints: {
         createNewEmailContent: '/TdsCertificate/AddNewTdsCertificate',

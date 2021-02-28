@@ -27,25 +27,25 @@ export class MailTypesComponent implements OnInit {
     {
       EmailType: 'Q2',
       FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q1 Results',
+      Subject: 'Regarding Q2 Results',
       createdOn: new Date()
     },
     {
       EmailType: 'Q3',
       FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q1 Results',
+      Subject: 'Regarding Q3 Results',
       createdOn: new Date()
     },
     {
       EmailType: 'Q4',
       FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q1 Results',
+      Subject: 'Regarding Q4 Results',
       createdOn: new Date()
     },
     {
       EmailType: 'Q5',
       FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q1 Results',
+      Subject: 'Regarding Q5 Results',
       createdOn: new Date()
     }
   ]
