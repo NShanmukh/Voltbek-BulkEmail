@@ -1,3 +1,6 @@
-<p>
-  mail-types-create works!
-</p>
+<form [formGroup]="form">
+  <quill-editor #editor [style.display]="hide ? 'none' : 'block'" formControlName="editor"></quill-editor>
+  <p class="mt-2">
+    Output : {{form.controls.editor.value}}
+  </p>
+</form>

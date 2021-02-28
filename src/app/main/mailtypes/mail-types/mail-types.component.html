@@ -10,7 +10,7 @@
           <input matInput (keyup)="applyFilter($event.target.value)">
         </mat-form-field>
 
-        <button mat-raised-button fxFlex="10" [routerLink]="'/mailTypeCreate'" class="crtBtn"
+        <button mat-raised-button fxFlex="10" [routerLink]="'/mailTypes/mailTypeCreate'" class="crtBtn"
           style="background: #00bbbe;color: white;">New Type
         </button>
       </div>
@@ -75,11 +75,6 @@
 
       </div>
     </div>
-    <form [formGroup]="form">
-      <quill-editor #editor [style.display]="hide ? 'none' : 'block'" formControlName="editor"></quill-editor>
-      <p class="mt-2">
-        Output : {{form.controls.editor.value}}
-      </p>
-    </form>
+    
   </div>
 </div>

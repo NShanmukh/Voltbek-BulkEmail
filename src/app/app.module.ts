@@ -18,6 +18,9 @@ import { AppComponent } from 'app/app.component';
 import { LayoutModule } from 'app/layout/layout.module';
 import { QuillModule } from 'ngx-quill';
 import { LoginComponent } from './main/auth/login/login.component';
+import { MaterialModule } from '@fuse/material.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 const appRoutes: Routes = [
     {
@@ -62,6 +65,10 @@ const appRoutes: Routes = [
         FuseSharedModule,
         FuseSidebarModule,
         FuseThemeOptionsModule,
+        MaterialModule,
+        FormsModule,
+        ReactiveFormsModule,
+        FlexLayoutModule,
 
         // App modules
         LayoutModule

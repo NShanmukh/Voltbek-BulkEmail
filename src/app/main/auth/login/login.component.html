@@ -1,133 +1,86 @@
 <div id="login" class="login" fxLayout="row" fxLayoutAlign="start" style="background-color: white;">
   <div id="login-intro" fxFlex fxHide fxShow.gt-xs fxShow.gt-md>
-      <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
-          <div class="img-holder">
-              <div class="bg" fxFlex.md="90">
-                  <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
-                      <img class="logo-size" src="assets/ui-images/voltas_logo_white.png" alt="">
-                  </div>
-              </div>
+    <div class="title" [@animate]="{value:'*',params:{delay:'50ms',y:'25px'}}">
+      <div class="img-holder">
+        <div class="bg" fxFlex.md="90">
+          <div class="logo" [@animate]="{value:'*',params:{scale:'0.2'}}">
+            <img class="logo-size" src="assets/ui-images/voltas_logo_white.png" alt="">
           </div>
+        </div>
       </div>
+    </div>
   </div>
   <div id="login-form-wrapper" fxFlex="20" fxFlex.md="10" class="mr-80"
-      [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
-      <div id="login-form" [ngClass]="{'loginalign' : signUpField }">
-          <div class="logo" fxHide.gt-xs>
-              <img class="logo-size" src="assets/ui-images/Nvoltas.png" alt="">
-          </div>
-          <div>
-              <div fxLayout="column" class="title font-weight-700">
-                  <span style="margin-bottom: 2px; font-weight: 100; font-size: 28px;"> WELCOME TO </span>
-                  <div fxLayout="row">
-                      <span style="color: #002a75;font-size: 24px;">VOLTAS </span>&nbsp; <span
-                          style="color: #bdbdbd; font-size: 24px;">|</span> &nbsp;
-                      <span style="color: #00bbbe; font-size: 24px;"> VENDOR PORTAL</span>
-                  </div>
-              </div>
-              <!-- <br /> -->
-
-              <div class="pt-24" *ngIf="!signUpField"><span style="font-size: 24px;">Sign In</span></div>
-              <div class="pt-16" *ngIf="signUpField"><span style="font-size: 20px;">Sign Up</span>
-                  <span class="subtitle secondary-text" style="font-size: 20px;"> - Sign up with
-                      below details
-                  </span>
-              </div>
-              <br *ngIf="!signUpField" />
-              <div *ngIf="!signUpField">
-                  <mat-radio-group class="column pt-4 pb-8 mr-8" [(ngModel)]="isRole" (change)="radio()"
-                      class="pb-32">
-                      <mat-radio-button value="Vendor">I'm a Vendor</mat-radio-button>
-                      <mat-radio-button value="Employee" class="ml-12">I'm an Employee</mat-radio-button> &nbsp;
-                  </mat-radio-group>
-              </div>
-              <br *ngIf="!signUpField" />
-              <div *ngIf="!signUpField" class="subtitle secondary-text" style="font-size: 18px;">
-                  <span *ngIf="isRole === 'Vendor'" style="color: #000000;"> Sign in with your vendor code</span>
-                  <span *ngIf="isRole === 'Employee'" style="color: #000000;"> Sign in with your employee code</span>
-              </div>
-              <!-- <div *ngIf="signUpField" class="subtitle secondary-text" style="font-size: 18px;"><span> Sign up with
-                      below details
-                  </span></div> -->
-              <form name="loginForm" [formGroup]="loginForm" novalidate >
-
-                  <mat-form-field appearance="fill">
-                      <mat-label *ngIf="isRole === 'Employee'">PF Number</mat-label>
-                      <mat-label *ngIf="isRole === 'Vendor'">Username</mat-label>
-                      <input matInput formControlName="userName">
-                      <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
-                      <mat-error *ngIf="loginForm.get('userName').hasError('required') && isRole === 'Vendor'">
-                          Username is required
-                      </mat-error>
-                      <mat-error *ngIf="loginForm.get('userName').hasError('required') && isRole === 'Employee'">
-                          PF Number is required
-                      </mat-error>
-                  </mat-form-field>
-
-                  <mat-form-field appearance="fill">
-                      <mat-label>Password</mat-label>
-                      <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
-                      <button mat-icon-button matSuffix>
-                          <mat-icon (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                      </button>
-                      <mat-error>
-                          Password is required
-                      </mat-error>
-                  </mat-form-field>
-
-                  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="pb-16">
-                      <mat-checkbox class="remember-me" aria-label="Remember Me" formControlName="remember">
-                          Save Details
-                      </mat-checkbox>
-                      <span *ngIf="isRole === 'Employee'"><a style="color: #002a75; cursor: pointer"
-                              (click)="onClickForgetPass()">Forgot Password ?</a></span>
-                  </div>
-
-                  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-                      <div *ngIf="isRole === 'Vendor'">
-                          <span><a style="color: #002a75; cursor: pointer" (click)="onClickForgetPass()">Forgot
-                                  Password ?</a></span>
-                      </div>
-                      <div *ngIf="isRole === 'Vendor'">
-                          <span (click)="signInOrUp(true)"><a style="color: #002a75; cursor: pointer">New
-                                  Vendor ?</a></span>
-                      </div>
-                  </div>
-
-                  <label class="mat-error" *ngIf="isLoginError"> Invalid Username/Password
-                  </label>
-                  <br />
-                  <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
-                      <button mat-raised-button *ngIf="isRole === 'Vendor'" style=" background-color: orange;"
-                          mat-raised-button class="submit-button" aria-label="LOGIN" [disabled]="loginForm.invalid"
-                          (click)="onUserManualClick()">
-                          USER MANUAL
-                      </button>
-
-                      <button *ngIf="isRole === 'Employee'" style=" background-color: #00bbbe;margin-left: auto;"
-                          mat-raised-button class="submit-button-emp" aria-label="LOGIN"
-                          [disabled]="loginForm.invalid" (click)="onLoginClick()">
-                          SIGN IN
-                      </button>
-
-                      <button *ngIf="isRole === 'Vendor'" style=" background-color: #00bbbe;" mat-raised-button
-                          class="submit-button" aria-label="LOGIN" [disabled]="loginForm.invalid"
-                          (click)="onVendorLoginClick()">
-                          SIGN IN
-                      </button>
-                  </div>
-
-              </form>
-
-              <div fxLayout="row" fxLayoutAlign="start center" fxHide fxShow.gt-xs
-                  style="position: fixed;bottom: 8px;">
-                  <span class="mat-caption" style="font-size: x-small;">
-                      2020 VOLTAS © ALL RIGHTS RESERVED.</span>
-                  <span class="mat-caption pl-52" style="cursor: pointer !important;" (click)="needHelpInfo()">
-                      <a style="color: #002a75 !important">Need support ?</a>
-                  </span>
-              </div>
-          </div>
+    [@animate]="{value:'*',params:{delay:'300ms',x:'100%'}}">
+    <div id="login-form">
+      <div class="logo" fxHide.gt-xs>
+        <img class="logo-size" src="assets/ui-images/Nvoltas.png" alt="">
       </div>
+      <div>
+        <div fxLayout="column" class="title font-weight-700">
+          <span style="margin-bottom: 2px; font-weight: 100; font-size: 28px;"> WELCOME TO </span>
+          <div fxLayout="row">
+            <span style="color: #002a75;font-size: 24px;">VOLTAS </span>&nbsp; <span
+              style="color: #bdbdbd; font-size: 24px;">|</span> &nbsp;
+            <span style="color: #00bbbe; font-size: 24px;"> VENDOR PORTAL</span>
+          </div>
+        </div>
+        <!-- <br /> -->
+
+        <div class="pt-24"><span style="font-size: 24px;">Sign In</span></div>
+
+        <span style="color: #000000;"> Sign in with your employee code</span>
+
+        <form name="loginForm" [formGroup]="loginForm" novalidate>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="userName">
+            <mat-icon matSuffix class="secondary-text">account_circle</mat-icon>
+            <mat-error *ngIf="loginForm.get('userName').hasError('required')">
+              Username is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+            <button mat-icon-button matSuffix>
+              <mat-icon (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-error>
+              Password is required
+            </mat-error>
+          </mat-form-field>
+
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="pb-16">
+            <mat-checkbox class="remember-me" aria-label="Remember Me" formControlName="remember">
+              Save Details
+            </mat-checkbox>
+            <span><a style="color: #002a75; cursor: pointer" (click)="onClickForgetPass()">Forgot Password ?</a></span>
+          </div>
+
+          <label class="mat-error" *ngIf="isLoginError"> Invalid Username/Password
+          </label>
+          <br />
+          <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center">
+
+            <button style=" background-color: #00bbbe;margin-left: auto;" mat-raised-button class="submit-button-emp"
+              aria-label="LOGIN" [disabled]="loginForm.invalid" (click)="onLoginClick()">
+              SIGN IN
+            </button>
+          </div>
+
+        </form>
+
+        <div fxLayout="row" fxLayoutAlign="start center" fxHide fxShow.gt-xs style="position: fixed;bottom: 8px;">
+          <span class="mat-caption" style="font-size: x-small;">
+            2020 VOLTAS © ALL RIGHTS RESERVED.</span>
+          <span class="mat-caption pl-52" style="cursor: pointer !important;" (click)="needHelpInfo()">
+            <a style="color: #002a75 !important">Need support ?</a>
+          </span>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

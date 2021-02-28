@@ -4,16 +4,8 @@ login {
   #login {
     width: 100%;
     overflow: hidden;
-    //background-size: cover;
-    //background-color: #3276BD;
-    //background-color: #0071bb !important;
     #login-intro {
-      //@extendpadding: 50px;
-      // background: url("../../../../assets/ui-images/Group_324.png") no-repeat;
-      //   .img-holder {
-      // width: 50%;
-      // }
-
+     
       .img-holder .info-holder h3 {
         color: #000;
       }
@@ -40,7 +32,7 @@ login {
 
       .img-holder .bg {
         opacity: 1;
-        background-image: url("assets/ui-images/4888.jpg"), url("assets/ui-images/newvendor.png");
+        background-image: url("assets/ui-images/4888.jpg");
         background-repeat: no-repeat;
         height: 99vh;
       }
