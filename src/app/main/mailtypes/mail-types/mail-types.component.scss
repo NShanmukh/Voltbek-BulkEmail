@@ -9,3 +9,28 @@ table {
     border-radius: 0px;
     margin-left: 12px;
 }
+
+
+.mat-column-EmailType {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-FromAdd {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-Subject {
+    flex: 0 0 5% !important;
+    min-width: 230px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-createdOn {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}

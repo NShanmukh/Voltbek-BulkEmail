@@ -1,6 +1,61 @@
-<form [formGroup]="form">
-  <quill-editor #editor [style.display]="hide ? 'none' : 'block'" formControlName="editor"></quill-editor>
-  <p class="mt-2">
-    Output : {{form.controls.editor.value}}
-  </p>
-</form>
+<div class="page-layout carded fullwidth">
+  <div class="center" style="padding:0px;">
+    <div class="content-card" style="padding: 10px 40px;">
+      <div fxLayout.xs="column" fxLayoutGap.xs="1.5%" fxLayout.gt-sm="row" fxLayoutAlign="start center"
+        fxLayoutAlign.xs="start start">
+        <span fxFlex="93.5" fxFlex.sm="30" fxFlexOffset.xs="0" class="mat-title pt-0 mb-0">CREATE NEW MAIL TYPE</span>
+      </div>
+      <form [formGroup]="form">
+        <div fxLayout="row" fxLayoutAlign="start center" class="pt-12">
+          <mat-form-field appearance="outline" fxFlex="33">
+            <mat-label>Title</mat-label>
+            <input matInput formControlName="tdsTitle" readonly>
+            <mat-error *ngIf="form.get('tdsTitle').hasError('required')">
+              Title is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="33" style="margin-left: auto;">
+            <mat-label>Subject</mat-label>
+            <input matInput formControlName="tdsSubject">
+            <mat-error *ngIf="form.get('tdsSubject').hasError('required')">
+              Subject is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" fxFlex="33" style="margin-left: auto;">
+            <mat-label>From Address</mat-label>
+            <input matInput formControlName="tdsEmailFrom">
+            <mat-error *ngIf="form.get('tdsEmailFrom').hasError('required')">
+              From Address is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div fxLayout="row" fxLayoutAlign="start center" style="margin-top: -8px;">
+          <mat-form-field appearance="outline" fxFlex="100">
+            <mat-label>CC</mat-label>
+            <input matInput formControlName="tdsEmailCc">
+            <mat-error *ngIf="form.get('tdsEmailCc').hasError('required')">
+              CC is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <quill-editor #editor [style.display]="hide ? 'none' : 'block'" formControlName="tdsEmailBody"
+          style="margin-top: -8px;"></quill-editor>
+        <!-- <p class="mt-2">
+          Output : {{form.controls.tdsEmailBody.value}}
+        </p> -->
+
+        <div class="pb-8" style="padding-top: 14px;" fxLayout="row" fxLayoutAlign="start center">
+          <button mat-raised-button style="background-color: #00bbbe;border-radius: 0px;" (click)="onBasicInfoSubmit()"
+            class="mat-accent">Create</button>
+
+          <button mat-raised-button style="background-color: white;margin-left: 8px; color: black;border-radius: 0px;"
+            [routerLink]="'/mailTypes/mailTypes'" class="mat-accent">Back</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

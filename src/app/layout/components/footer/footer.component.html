@@ -1,20 +1,19 @@
-<mat-toolbar>
-
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutAlign.gt-xs="space-between center" fxFlex>
-
-        <a href="https://1.envato.market/c/1257954/275988/4415?u=https%3A%2F%2Fthemeforest.net%2Fitem%2Ffuse-angularjs-material-design-admin-template%2F12931855"
-           target="_blank" mat-button class="pink" fxFlex="0 0 auto" fxLayout="row"
-           fxLayoutAlign="start center">
-            <mat-icon class="s-16 mr-sm-4">shopping_cart</mat-icon>
-            <span>Purchase FUSE (Angular 7+)</span>
-        </a>
-
-        <div fxLayout="row" fxLayoutAlign="start center" fxHide fxShow.gt-xs>
-            <a mat-button routerLink="/documentation/getting-started/introduction">Documentation</a>
-            <span>&bull;</span>
-            <a mat-button routerLink="/documentation/changelog">Changelog</a>
-        </div>
-
+<div fxLayout="row" fxLayout.xs="column" fxFlexFill class="footersec p-16 h-40">
+    <div fxFlex="100" fxFlex.xs="100" style="font-size: smaller;">
+        <span fxFlex="2" fxLayoutAlign="start center" class="ml-24">
+            <mat-icon style="font-size: 20px;margin-bottom: -5px;">copyright</mat-icon>
+        </span>
+        <span fxFlex="23" fxLayoutAlign="start center">
+            Voltas Limited
+        </span>
+        <span fxFlex="50">
+            <span> Voltas House 'A' Block,</span>
+            <span> Dr. Babasaheb Ambedkar Rd,</span>
+            <span> Chinchpokli, Mumbai - 400 033,</span>
+            <span> India,T - 022 6665 6666</span>
+        </span>
+        <span fxFlex="25" fxLayoutAlign="end center" class="mr-24" style="cursor: pointer !important;" (click)="needHelpInfo()">
+            Need Support ?
+        </span>
     </div>
-
-</mat-toolbar>
+</div>

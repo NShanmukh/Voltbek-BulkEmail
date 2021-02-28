@@ -17,8 +17,44 @@ export class MailTypesComponent implements OnInit {
   form: FormGroup;
   hide = false;
 
+  mailContentTypes = [
+    {
+      EmailType: 'Q1',
+      FromAdd: 'vserveq@voltasworld.com',
+      Subject: 'Regarding Q1 Results',
+      createdOn: new Date()
+    },
+    {
+      EmailType: 'Q2',
+      FromAdd: 'vserveq@voltasworld.com',
+      Subject: 'Regarding Q1 Results',
+      createdOn: new Date()
+    },
+    {
+      EmailType: 'Q3',
+      FromAdd: 'vserveq@voltasworld.com',
+      Subject: 'Regarding Q1 Results',
+      createdOn: new Date()
+    },
+    {
+      EmailType: 'Q4',
+      FromAdd: 'vserveq@voltasworld.com',
+      Subject: 'Regarding Q1 Results',
+      createdOn: new Date()
+    },
+    {
+      EmailType: 'Q5',
+      FromAdd: 'vserveq@voltasworld.com',
+      Subject: 'Regarding Q1 Results',
+      createdOn: new Date()
+    }
+  ]
+
   @ViewChild('editor') editor: QuillEditorComponent
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {
+    this.dataSource = new MatTableDataSource(this.mailContentTypes);
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
   }

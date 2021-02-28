@@ -13,7 +13,9 @@ toolbar {
     .mat-toolbar {
         position: relative;
         background: inherit !important;
-        color: inherit !important;
+        color: white !important;
+        height: 59px;
+        background-color: rgb(7, 37, 102) !important;
     }
 
     .logo {
@@ -33,7 +35,7 @@ toolbar {
         min-width: 64px;
         height: 64px;
 
-        @include media-breakpoint('xs') {
+        @include media-breakpoint("xs") {
             height: 56px;
         }
     }
@@ -47,7 +49,7 @@ toolbar {
         height: 64px;
         width: 1px;
 
-        @include media-breakpoint('xs') {
+        @include media-breakpoint("xs") {
             height: 56px;
         }
     }

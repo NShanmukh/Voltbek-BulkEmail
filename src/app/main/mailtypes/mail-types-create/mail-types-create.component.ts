@@ -19,11 +19,15 @@ export class MailTypesCreateComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.fb.group({
-      editor: ['test']
+      tdsTitle: ['TDSMail'],
+      tdsSubject: [''],
+      tdsEmailFrom: [''],
+      tdsEmailCc: [''],
+      tdsEmailBody: ['']
     });
     this.form
       .controls
-      .editor
+      .tdsEmailBody
       .valueChanges.pipe(
         debounceTime(400),
         distinctUntilChanged()

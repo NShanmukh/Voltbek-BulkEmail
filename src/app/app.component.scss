@@ -20,12 +20,11 @@
         border-radius: 0;
         margin: 0;
         pointer-events: auto;
-        opacity: .90;
+        opacity: 0.9;
         z-index: 998;
 
         &.right-side-panel {
-
-            @include media-breakpoint('gt-md') {
+            @include media-breakpoint("gt-md") {
                 right: 70px;
             }
         }
@@ -48,4 +47,23 @@
         min-width: 360px;
         max-width: 360px;
     }
+}
+
+::ng-deep .mat-menu-content:not(:empty) {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    min-width: 212px;
+    max-width: 280px;
+    border-radius: 0px;
+}
+
+::ng-deep .mat-form-field-flex > .mat-form-field-infix {
+    padding: 0.5em 0 !important;
+    border-top: 18px solid transparent;
+}
+::ng-deep .mat-form-field-label-wrapper {
+    top: -1.4em !important;
+}
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-suffix {
+    top: 0em !important;
 }
