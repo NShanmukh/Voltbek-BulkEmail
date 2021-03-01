@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fuseAnimations } from '@fuse/animations';
 import { FuseConfigService } from '@fuse/services/config.service';
+import { SnackbarService } from 'app/services/snackbar.service';
 
 @Component({
   selector: 'login',
@@ -14,7 +15,7 @@ import { FuseConfigService } from '@fuse/services/config.service';
 
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private _formBuilder: FormBuilder, private _fuseConfigService: FuseConfigService, private router: Router) {
+  constructor(private _formBuilder: FormBuilder, private _fuseConfigService: FuseConfigService, private router: Router, private snackBar: SnackbarService) {
     this._fuseConfigService.config = {
       layout: {
         toolbar: {
@@ -36,6 +37,15 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginClick() {
-    this.router.navigate(["/mailTypes/mailTypes"]);
+    if (this.loginForm.invalid) {
+      this.snackBar.errorPopup('Please fill all mandatory fields');
+      return;
+    }
+    if ((this.loginForm.value.userName.toLocaleLowerCase() === 'user000001' || this.loginForm.value.userName.toLocaleLowerCase()==='admin') && this.loginForm.value.password === '123456') {
+      this.router.navigate(["/mailTypes/mailTypes"]);
+    }
+    else{
+      this.snackBar.errorPopup('Invalid credentials');
+    }
   }
 }

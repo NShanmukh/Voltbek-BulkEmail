@@ -32,6 +32,13 @@ export class EmailtypesService {
     }));
   }
 
+  uploadEmailContentDocs(body: any) {
+    return this.http.post(this.baseUrl + environment.apiEndPoints.uploadEmailContentDocs ,body).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.uploadEmailContentDocs);
+      return data;
+    }));
+  }
+
   deleteEmailDocs(tdsId) {
     return this.http.get(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType + '/' + tdsId).pipe(map(data => {
       this.cache.delete(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType);

@@ -18,46 +18,13 @@ export class MailTypesComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns = ['EmailType', 'FromAdd', 'Subject', 'createdOn', 'actions'];
+  displayedColumns = ['tdsTitle', 'tdsEmailFrom', 'tdsSubject', 'tdsCreatedOn', 'tdsCreatedBy', 'actions'];
   form: FormGroup;
   hide = false;
 
-  mailContentTypes = [
-    {
-      EmailType: 'Q1',
-      FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q1 Results',
-      createdOn: new Date()
-    },
-    {
-      EmailType: 'Q2',
-      FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q2 Results',
-      createdOn: new Date()
-    },
-    {
-      EmailType: 'Q3',
-      FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q3 Results',
-      createdOn: new Date()
-    },
-    {
-      EmailType: 'Q4',
-      FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q4 Results',
-      createdOn: new Date()
-    },
-    {
-      EmailType: 'Q5',
-      FromAdd: 'vserveq@voltasworld.com',
-      Subject: 'Regarding Q5 Results',
-      createdOn: new Date()
-    }
-  ]
 
   constructor(private emailService: EmailtypesService, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService, private dialog: MatDialog) {
-    this.dataSource = new MatTableDataSource(this.mailContentTypes);
-    this.dataSource.sort = this.sort;
+
   }
 
   ngOnInit(): void {
@@ -71,6 +38,8 @@ export class MailTypesComponent implements OnInit {
         if (data.result) {
           this.loaderService.hide();
           this.dataSource = new MatTableDataSource(data.result);
+          this.dataSource.sort = this.sort;
+          this.dataSource.paginator = this.paginator;
         }
       } else {
         this.loaderService.hide();
@@ -88,11 +57,10 @@ export class MailTypesComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  openConfirmationDialog(type: string, recId: any) {
+  openConfirmationDialog(recId: any) {
     this.dialogRef = this.dialog.open(UploadFileDialogComponent, {
       disableClose: true
     });
-    this.dialogRef.componentInstance.fileType = type;
     this.dialogRef.componentInstance.tdsId = recId;
   }
 }

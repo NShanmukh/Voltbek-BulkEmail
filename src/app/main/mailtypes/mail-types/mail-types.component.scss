@@ -11,25 +11,31 @@ table {
 }
 
 
-.mat-column-EmailType {
+.mat-column-tdsTitle {
     flex: 0 0 5% !important;
     min-width: 130px;
     border-right: solid 1px #e0e0e0;
 }
 
-.mat-column-FromAdd {
+.mat-column-tdsEmailFrom {
     flex: 0 0 5% !important;
     min-width: 130px;
     border-right: solid 1px #e0e0e0;
 }
 
-.mat-column-Subject {
+.mat-column-tdsSubject {
     flex: 0 0 5% !important;
     min-width: 230px;
     border-right: solid 1px #e0e0e0;
 }
 
-.mat-column-createdOn {
+.mat-column-tdsCreatedOn {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsCreatedBy {
     flex: 0 0 5% !important;
     min-width: 130px;
     border-right: solid 1px #e0e0e0;

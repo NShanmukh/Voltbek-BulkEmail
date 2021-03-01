@@ -11,7 +11,7 @@ export const environment = {
     apiEndPoints: {
         login: '/TdsCertificate/Login',
         createNewEmailContent: '/TdsCertificate/AddNewTdsCertificate',
-        getAllEmailContents: '/TdsCertificate/GetAllTdsCertificate',
+        getAllEmailContents: '/TdsCertificate/GetAllTdsCertificates',
         updateEmailContent: '/TdsCertificate/UpdateTdsCertificate',
 
         uploadEmailContentDocs: '/TdsCertificate/UploadDocuments',

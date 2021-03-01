@@ -78,7 +78,8 @@ const appRoutes: Routes = [
         LayoutModule
     ],
     entryComponents: [
-        UploadFileDialogComponent
+        UploadFileDialogComponent,
+        PopupDialogComponent
     ],
     bootstrap: [
         AppComponent

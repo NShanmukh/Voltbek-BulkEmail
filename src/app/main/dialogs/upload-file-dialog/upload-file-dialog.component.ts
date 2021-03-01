@@ -18,10 +18,14 @@ export class UploadFileDialogComponent implements OnInit {
 
   popupRef: MatDialogRef<PopupDialogComponent>;
 
-  selectedFile = null;
-
+  // selectedFile: any;
+  // selectedExcelFile: any;
+  selectedFile = [];
+  selectedExcelFile = [];
+  availabledisplayedColumns: string[] = ['Sno', 'filename', 'actions'];
   displayedColumns: string[] = ['Sno', 'objType', 'filename', 'actions'];
   dataSource: MatTableDataSource<any>;
+  availableDataSource: MatTableDataSource<any>;
 
   constructor(public dialogRef: MatDialogRef<UploadFileDialogComponent>, private loaderService: FuseSplashScreenService, private dialog: MatDialog, private emailService: EmailtypesService, private snackBar: SnackbarService) { }
 
@@ -49,22 +53,38 @@ export class UploadFileDialogComponent implements OnInit {
   }
 
   onFileSelected(event): void {
-    if (event.target.files[0]) {
-      if (event.target.files[0].size < 5000000) {
-        const uploadFile = event.target.files[0].name;
+    for (var i = 0; i < event.target.files.length; i++) {
+      if (event.target.files[i].size < 5000000) {
+        const uploadFile = event.target.files[i].name;
         const uploadType = uploadFile.split('.');
         this.imageType = uploadType[1];
+        // this.selectedFile = [];
+        // this.selectedExcelFile = [];
         this.imageType = this.imageType.toLocaleLowerCase();
-        if (this.imageType.toLocaleLowerCase() === 'jpg' || this.imageType.toLocaleLowerCase() === 'pdf') {
-          this.selectedFile = event.target.files[0];
-          this.selection = 'selected';
+        if (this.imageType.toLocaleLowerCase() === 'pdf' || this.imageType.toLocaleLowerCase() === 'xlsx') {
+          if (this.imageType.toLocaleLowerCase() === 'pdf') {
+            this.selectedFile.push(event.target.files[i]);
+            this.selection = 'selected';
+          }
+          else if (this.imageType.toLocaleLowerCase() === 'xlsx') {
+            this.selectedExcelFile.push(event.target.files[i]);
+            this.selection = 'selected';
+          }
+          const selectedFiles = [];
+          this.selectedFile.forEach(element => {
+            selectedFiles.push(element);
+          });
+          this.selectedExcelFile.forEach(element => {
+            selectedFiles.push(element);
+          });
+          this.availableDataSource = new MatTableDataSource(selectedFiles);
         }
-        else if (this.imageType.toLocaleLowerCase() !== 'jpg' && this.imageType.toLocaleLowerCase() !== 'pdf') {
+        else if (this.imageType.toLocaleLowerCase() !== 'xlsx' && this.imageType.toLocaleLowerCase() !== 'pdf') {
           this.selection = '';
           this.popupRef = this.dialog.open(PopupDialogComponent, {
             disableClose: false
           });
-          this.popupRef.componentInstance.confirmMessage = "Please upload only " + ' PDF/JPG ' + ' ' + 'files';
+          this.popupRef.componentInstance.confirmMessage = "Please upload only " + ' PDF/Excel ' + ' ' + 'files';
           this.popupRef.componentInstance.id = '1';
         }
       }
@@ -93,7 +113,6 @@ export class UploadFileDialogComponent implements OnInit {
     });
   }
 
-
   deleteDocument(id) {
     this.loaderService.show();
     this.emailService.deleteEmailDocs(id).subscribe((data: any) => {
@@ -117,11 +136,11 @@ export class UploadFileDialogComponent implements OnInit {
     this.loaderService.show();
     const formData: FormData = new FormData();
     if (this.selectedFile) {
-      formData.append('ExcelFile', this.selectedFile);
-      // formData.append('VSTypeId', this.typeID);
+      formData.append('ExcelFile', JSON.stringify(this.selectedExcelFile));
+      formData.append('PdfFiles', JSON.stringify(this.selectedFile));
       formData.append('TdsId', this.tdsId);
       this.loaderService.show();
-      this.emailService.deleteEmailDocs(formData).subscribe((data: any) => {
+      this.emailService.uploadEmailContentDocs(formData).subscribe((data: any) => {
         if (data.success) {
           if (data.result) {
             this.snackBar.successPopup('Document uploaded successfully', []);

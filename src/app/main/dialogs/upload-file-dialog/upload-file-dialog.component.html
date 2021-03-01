@@ -5,18 +5,13 @@
   </span>
   <mat-icon class="hoveron" style="float: right; cursor: pointer;" title="Close" (click)="dialogRef.close()">
     close</mat-icon>
-  <!-- <div *ngIf="isLoading" class="spinnerdiv">
-    <mat-spinner diameter="30" *ngIf="isLoading" class="spinner" style="margin:0 auto;">
-    </mat-spinner>
-  </div> -->
 
   <div class="pl-20 pt-32">
     <img src="assets/ui-images/ic_choose_file.png" style="margin-left: auto;
       margin-right: auto; display: block; max-width: 5% !important;">
     <br />
-    <span *ngIf="!selection " style="text-align: center !important; display: block;">Only <b>{{fileType}}</b> file of not more
-      than
-      5MB size are accepted.</span>
+    <span *ngIf="!selection " style="text-align: center !important; display: block;">Only <b>EXCEL/PDF</b> file of
+      not more than 5MB size are accepted.</span>
     <!-- <span style="text-align: center !important;display: block;color: red;">{{impNote}}</span> -->
     <span *ngIf="selection" style="text-align: center !important; display: block;">{{selectedFile.name}}</span>
     <br />
@@ -25,18 +20,62 @@
   <div mat-dialog-actions class="pt-8" style="text-align: center;display: block;" *ngIf="!selection">
     <button mat-raised-button title="Back" (click)="dialogRef.close()" class="mr-16">Cancel</button>
     <button mat-raised-button class="mr-16" style="background-color: #072566;color: white;">Choose File
-      <input type="file" class="hide_file" (change)="onFileSelected($event)">
+      <input type="file" multiple class="hide_file" (change)="onFileSelected($event)">
     </button>
   </div>
 
   <div style="text-align: center; display: block;" mat-dialog-actions class="pt-8 pl-20 mb-2" *ngIf="selection">
     <button mat-raised-button title="Reset Selection" style="background-color: orangered;" class="mr-16"
       (click)="ResetSelection()">Reset</button>
+      <button mat-raised-button class="mr-16" style="background-color: #072566;color: white;">Choose File
+        <input type="file" multiple class="hide_file" (change)="onFileSelected($event)">
+      </button>
     <button mat-raised-button (click)="onDocSubmit()" class="mr-16"
       style="background-color: #072566;color: white;">Upload</button>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort class="pt-24">
+  <span style="float: left;" class="text-bold" style="color: #072566;"
+    *ngIf="availableDataSource?.filteredData?.length > 0;">
+    <b>Selected Documents</b>
+  </span>
+  <table mat-table [dataSource]="availableDataSource" matSort class="pt-24"
+    *ngIf="availableDataSource?.filteredData?.length > 0;">
+
+    <ng-container matColumnDef="Sno">
+      <th style="text-align: center;" accent mat-header-cell text-bold *matHeaderCellDef>S.No.</th>
+      <td style="text-align: center;" mat-cell *matCellDef="let row, let i = index;">
+        <span class="mobile-label"></span>{{ i+1 }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="filename">
+      <th class="text-bold  pl-4" mat-header-cell *matHeaderCellDef mat-sort-header>
+        Name</th>
+      <td class='m-card-title pl-4' mat-cell *matCellDef="let row"><span class="mobile-label"></span>{{ row.name
+        }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th class="text-bold  pl-4" mat-header-cell text-bold *matHeaderCellDef mat-sort-header>Actions
+      </th>
+      <td class='m-card-title pl-4' mat-cell *matCellDef="let row">
+        <a href="{{row.fileURL}}" target="_blank">
+          <mat-icon class="btton-delete" title="File Download">file_download</mat-icon>
+        </a>
+        <mat-icon class="btton-delete" title="Delete" (click)="openConfirmationDialog(row.documentId)">delete</mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="availabledisplayedColumns sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns: availabledisplayedColumns"></tr>
+  </table>
+
+  <span style="float: left;" class="text-bold" style="color: #072566;"
+    *ngIf="dataSource?.filteredData?.length > 0;">
+    <b>Available Documents</b>
+  </span>
+  <table mat-table [dataSource]="dataSource" matSort class="pt-24"*ngIf="dataSource?.filteredData?.length > 0;">
 
     <ng-container matColumnDef="Sno">
       <th style="text-align: center;" accent mat-header-cell text-bold *matHeaderCellDef>S.No.</th>
