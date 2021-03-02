@@ -18,7 +18,7 @@ export class UserMailListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns = ['tdsUserName', 'tdsMailId', 'tdsPdfName', 'tdsIsMailSended', 'tdsCreatedOn', 'tdsCreatedBy'];
+  displayedColumns = ['tdsUserName', 'tdsMailId', 'tdsPdfName', 'tdsIsMailSended', 'createdOn', 'createdBy'];
 
   hide = false;
 

@@ -25,7 +25,7 @@ export class MailTypesCreateComponent implements OnInit {
       tdsTitle: ['TDSMail', Validators.required],
       tdsSubject: ['', Validators.required],
       tdsEmailFrom: ['', Validators.required],
-      tdsEmailCc: ['', Validators.required],
+      tdsEmailCc: [''],
       tdsEmailBody: ['', Validators.required]
     });
     this.form
