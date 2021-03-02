@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
 import { UploadFileDialogComponent } from 'app/main/dialogs/upload-file-dialog/upload-file-dialog.component';
 import { EmailtypesService } from 'app/services/emailtypes.service';
@@ -22,8 +23,7 @@ export class MailTypesComponent implements OnInit {
   form: FormGroup;
   hide = false;
 
-
-  constructor(private emailService: EmailtypesService, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService, private dialog: MatDialog) {
+  constructor(private emailService: EmailtypesService, private router: Router, private snackBar: SnackbarService, private loaderService: FuseSplashScreenService, private dialog: MatDialog) {
 
   }
 
@@ -62,5 +62,10 @@ export class MailTypesComponent implements OnInit {
       disableClose: true
     });
     this.dialogRef.componentInstance.tdsId = recId;
+  }
+
+  viewEmailUserList(id, status) {
+    sessionStorage.setItem('completedStatus', status);
+    this.router.navigate(['/mailTypes/userlist', id])
   }
 }

@@ -10,6 +10,9 @@ export const environment = {
         uploadEmailContentDocs: '/TdsCertificate/UploadDocuments',
         uploadEmailToUserExcel: '/TdsCertificate/TdsCertificateSendMails',
         
+        getAllEmailUserList:'/TdsCertificate/GetAllEmailsList',
+        sendEmailToUserList:'/TdsCertificate/TdsCertificateSendMails',
+        
         getAllEmailDocsByType: '/TdsCertificate/getTdsEmailDocs',
         deleteEmailDocsByType: '/TdsCertificate/deleteTdsEmailDocs',
     }

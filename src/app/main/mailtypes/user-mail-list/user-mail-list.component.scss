@@ -1,0 +1,56 @@
+table {
+    width: 100%;
+}
+
+::ng-deep .crtBtn {
+    color: white;
+    width: 111px;
+    margin-top: -12px;
+    border-radius: 0px;
+    margin-left: 12px;
+}
+
+
+.mat-column-tdsUserName {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsMailId {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsPdfName {
+    flex: 0 0 5% !important;
+    min-width: 230px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsIsMailSended {
+    flex: 0 0 5% !important;
+    min-width: 230px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsCreatedOn {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-column-tdsCreatedBy {
+    flex: 0 0 5% !important;
+    min-width: 130px;
+    border-right: solid 1px #e0e0e0;
+}
+
+.mat-header-cell {
+    color: #0c0c0c!important;
+    font-weight: bold;
+    font-size: 14px!important;
+    text-align: center!important;
+    line-height: initial!important;
+}

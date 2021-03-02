@@ -135,26 +135,26 @@ export class UploadFileDialogComponent implements OnInit {
   onDocSubmit() {
     this.loaderService.show();
     const formData: FormData = new FormData();
-    if (this.selectedFile) {
-      formData.append('ExcelFile', JSON.stringify(this.selectedExcelFile));
-      formData.append('PdfFiles', JSON.stringify(this.selectedFile));
-      formData.append('TdsId', this.tdsId);
-      this.loaderService.show();
-      this.emailService.uploadEmailContentDocs(formData).subscribe((data: any) => {
-        if (data.success) {
-          if (data.result) {
-            this.snackBar.successPopup('Document uploaded successfully', []);
-            this.getEmailContentDocs();
-            this.ResetSelection();
-          }
-          this.loaderService.hide();
+    // if (this.selectedFile) {
+    formData.append('ExcelFile', JSON.stringify(this.selectedExcelFile));
+    formData.append('PdfFiles', JSON.stringify(this.selectedFile));
+    formData.append('TdsId', this.tdsId);
+    this.loaderService.show();
+    this.emailService.uploadEmailContentDocs(formData).subscribe((data: any) => {
+      if (data.success) {
+        if (data.result) {
+          this.snackBar.successPopup('Document uploaded successfully', []);
+          this.getEmailContentDocs();
+          this.ResetSelection();
         }
-      }, err => {
         this.loaderService.hide();
-        this.snackBar.errorPopup('Error occurred!Please try again.')
-      });
+      }
+    }, err => {
+      this.loaderService.hide();
+      this.snackBar.errorPopup('Error occurred!Please try again.')
+    });
 
-    }
+    // }
   }
 
   ResetSelection(): void {

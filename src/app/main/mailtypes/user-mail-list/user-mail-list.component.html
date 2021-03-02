@@ -4,41 +4,49 @@
       <div fxLayout.xs="column" fxLayoutGap.xs="1.5%" fxLayout.gt-sm="row" fxLayoutAlign="center center"
         fxLayoutAlign.xs="start start" class="pt-12">
         <span fxFlex="60" fxFlex.sm="30" fxFlexOffset.xs="0" style="font-size: 24px;" class="mat-title mb-0">EMAIL
-          TYPES</span>
+          USER LIST</span>
         <mat-form-field fxFlex="30">
           <mat-label>Search</mat-label>
           <input matInput (keyup)="applyFilter($event.target.value)">
         </mat-form-field>
+        
+        <button mat-raised-button title="Back" fxFlex="10" class="crtBtn mr-16" style="cursor: pointer !important;" [routerLink]="'/mailTypes/mailTypes'">Cancel</button>
 
-        <button mat-raised-button fxFlex="10" [routerLink]="'/mailTypes/mailTypeCreate'" class="crtBtn"
-          style="background: #00bbbe;color: white;cursor: pointer !important;">New Type
+        <button mat-raised-button fxFlex="10" class="crtBtn" *ngIf="status !== 'true'" (click)="sendMailToUsers()"
+          style="background: #00bbbe;color: white;cursor: pointer !important;">Send Mail
         </button>
       </div>
 
       <div class="example-container mat-elevation-z4 mt-4">
 
         <div style="max-height: 450px;overflow: auto;">
-          <table mat-table [dataSource]="dataSource" matSort matSortActive="tdsCreatedOn" matSortDirection="asc">
-            <ng-container matColumnDef="tdsTitle">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning"> Title </th>
-              <td mat-cell *matCellDef="let element" class="text-center"
-                style="text-transform: uppercase;color: #00bbbe;font-weight: bold;cursor: pointer !important;">
-                <span (click)="viewEmailUserList(element.tdsId,element.tdsCompleted)">{{
-                  element.tdsTitle}}</span>
+          <table mat-table [dataSource]="dataSource" matSort>
+            <ng-container matColumnDef="tdsUserName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning"> Username </th>
+              <td mat-cell *matCellDef="let element" class="text-center">
+                <span [routerLink]="['/mailTypes/userlist', element.tdsId]">{{ element.tdsUserName}}</span>
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="tdsEmailFrom">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning"> From Address </th>
+            <ng-container matColumnDef="tdsMailId">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning"> Mail Id </th>
               <td mat-cell *matCellDef="let element" class="text-center">
-                {{element.tdsEmailFrom}}
+                {{element.tdsMailId}}
               </td>
             </ng-container>
 
-            <ng-container matColumnDef="tdsSubject">
-              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning">Subject </th>
+            <ng-container matColumnDef="tdsPdfName">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning">Pan No </th>
               <td mat-cell *matCellDef="let element" class="text-center">
-                {{element.tdsSubject}} </td>
+                {{element.tdsPdfName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tdsIsMailSended">
+              <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning">Is Mail Sent </th>
+              <td mat-cell *matCellDef="let element" class="text-center">
+                <span *ngIf="element.tdsIsMailSended">Mail Sent</span>
+                <span *ngIf="!element.tdsIsMailSended">Mail To Be Sent</span>
+              </td>
             </ng-container>
 
             <ng-container matColumnDef="tdsCreatedOn">
@@ -51,17 +59,6 @@
               <th mat-header-cell *matHeaderCellDef mat-sort-header class="aligning">Created By </th>
               <td mat-cell *matCellDef="let element" class="text-center">
                 {{element.tdsCreatedBy}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="actions">
-              <th mat-header-cell *matHeaderCellDef style="text-align: center !important;"> Actions </th>
-              <td mat-cell *matCellDef="let element" class="text-center">
-                <mat-icon style="font-size: 20px; color: #00bbbe;cursor: pointer !important;" title="View Details"
-                  (click)="openConfirmationDialog(element.tdsId)">
-                  attach_file
-                </mat-icon>
-
-              </td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky:true"></tr>

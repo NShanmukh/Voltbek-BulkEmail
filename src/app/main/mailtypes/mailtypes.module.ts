@@ -7,20 +7,25 @@ import { MaterialModule } from '@fuse/material.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { QuillModule } from 'ngx-quill';
+import { UserMailListComponent } from './user-mail-list/user-mail-list.component';
 
 const routes: Routes = [
   {
-      path: 'mailTypes',
-      component:MailTypesComponent
+    path: 'mailTypes',
+    component: MailTypesComponent
   },
   {
-      path: 'mailTypeCreate',
-      component:MailTypesCreateComponent
+    path: 'mailTypeCreate',
+    component: MailTypesCreateComponent
   },
+  {
+    path: 'userlist/:id',
+    component: UserMailListComponent
+  }
 ];
 
 @NgModule({
-  declarations: [MailTypesComponent, MailTypesCreateComponent],
+  declarations: [MailTypesComponent, MailTypesCreateComponent, UserMailListComponent],
   imports: [
     CommonModule,
     RouterModule.forChild(routes),
