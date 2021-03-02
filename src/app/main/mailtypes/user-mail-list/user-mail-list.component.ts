@@ -18,7 +18,7 @@ export class UserMailListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  displayedColumns = ['tdsUserName', 'tdsMailId', 'tdsPdfName', 'tdsIsMailSended', 'createdOn', 'createdBy'];
+  displayedColumns = ['tdsUserName', 'tdsMailId', 'tdsPdfName', 'tdsIsMailSended', 'createdOn', 'createdBy', 'actions'];
 
   hide = false;
 
@@ -66,7 +66,7 @@ export class UserMailListComponent implements OnInit {
         if (data.result) {
           if (data.result.statusCode === 201) {
             this.loaderService.hide();
-            this.snackBar.successPopup('Mail sent successfully',['/mailTypes/mailTypes']);
+            this.snackBar.successPopup('Mail sent successfully', ['/mailTypes/mailTypes']);
           }
           else {
             this.loaderService.hide();
@@ -83,5 +83,9 @@ export class UserMailListComponent implements OnInit {
       this.loaderService.hide();
       this.snackBar.errorPopup('Error occured, please try agian!');
     });
+  }
+
+  openConfirmationDialog(id: any) {
+
   }
 }

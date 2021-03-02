@@ -17,11 +17,11 @@ export class UploadFileDialogComponent implements OnInit {
   selection = '';
 
   popupRef: MatDialogRef<PopupDialogComponent>;
-
+  impNote='If any previous Excel is uploaded, that data will be removed post this excel upload';
   // selectedFile: any;
   // selectedExcelFile: any;
   selectedFile = [];
-  selectedExcelFile = [];
+  selectedExcelFile = null;
   availabledisplayedColumns: string[] = ['Sno', 'filename', 'actions'];
   displayedColumns: string[] = ['Sno', 'objType', 'filename', 'actions'];
   dataSource: MatTableDataSource<any>;
@@ -30,61 +30,75 @@ export class UploadFileDialogComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<UploadFileDialogComponent>, private loaderService: FuseSplashScreenService, private dialog: MatDialog, private emailService: EmailtypesService, private snackBar: SnackbarService) { }
 
   ngOnInit() {
-    this.getEmailContentDocs();
+    // this.getEmailContentDocs();
   }
 
-  getEmailContentDocs() {
-    this.loaderService.show();
-    this.emailService.getEmailContentDocs(this.fileType, this.tdsId).subscribe((data: any) => {
-      if (data.success) {
-        if (data.result) {
-          this.loaderService.hide();
-          this.dataSource = new MatTableDataSource(data.result);
-        }
-      }
-      else {
-        this.loaderService.hide();
-        this.snackBar.errorPopup('Error occured, Please try again!');
-      }
-    }, err => {
-      this.loaderService.hide();
-      this.snackBar.errorPopup('Error occured, Please try again!');
-    });
-  }
+  // getEmailContentDocs() {
+  //   this.loaderService.show();
+  //   this.emailService.getEmailContentDocs(this.fileType, this.tdsId).subscribe((data: any) => {
+  //     if (data.success) {
+  //       if (data.result) {
+  //         this.loaderService.hide();
+  //         this.dataSource = new MatTableDataSource(data.result);
+  //       }
+  //     }
+  //     else {
+  //       this.loaderService.hide();
+  //       this.snackBar.errorPopup('Error occured, Please try again!');
+  //     }
+  //   }, err => {
+  //     this.loaderService.hide();
+  //     this.snackBar.errorPopup('Error occured, Please try again!');
+  //   });
+  // }
 
-  onFileSelected(event): void {
+  onPdfFileSelected(event): void {
     for (var i = 0; i < event.target.files.length; i++) {
       if (event.target.files[i].size < 5000000) {
         const uploadFile = event.target.files[i].name;
         const uploadType = uploadFile.split('.');
         this.imageType = uploadType[1];
-        // this.selectedFile = [];
-        // this.selectedExcelFile = [];
         this.imageType = this.imageType.toLocaleLowerCase();
-        if (this.imageType.toLocaleLowerCase() === 'pdf' || this.imageType.toLocaleLowerCase() === 'xlsx') {
-          if (this.imageType.toLocaleLowerCase() === 'pdf') {
-            this.selectedFile.push(event.target.files[i]);
-            this.selection = 'selected';
-          }
-          else if (this.imageType.toLocaleLowerCase() === 'xlsx') {
-            this.selectedExcelFile.push(event.target.files[i]);
-            this.selection = 'selected';
-          }
-          const selectedFiles = [];
-          this.selectedFile.forEach(element => {
-            selectedFiles.push(element);
-          });
-          this.selectedExcelFile.forEach(element => {
-            selectedFiles.push(element);
-          });
-          this.availableDataSource = new MatTableDataSource(selectedFiles);
+        if (this.imageType.toLocaleLowerCase() === 'pdf') {
+          this.selectedFile.push(event.target.files[i]);
+          this.availableDataSource = new MatTableDataSource(this.selectedFile);
         }
-        else if (this.imageType.toLocaleLowerCase() !== 'xlsx' && this.imageType.toLocaleLowerCase() !== 'pdf') {
+        else if (this.imageType.toLocaleLowerCase() !== 'pdf') {
+          this.popupRef = this.dialog.open(PopupDialogComponent, {
+            disableClose: false
+          });
+          this.popupRef.componentInstance.confirmMessage = "Please upload only " + ' PDF ' + ' ' + 'files';
+          this.popupRef.componentInstance.id = '1';
+        }
+      }
+      else {
+        this.selection = '';
+        this.popupRef = this.dialog.open(PopupDialogComponent, {
+          disableClose: false
+        });
+        this.popupRef.componentInstance.confirmMessage = "Please upload files within size of 5MB";
+        this.popupRef.componentInstance.id = '1';
+      }
+    }
+  }
+
+  onExcelFileSelected(event): void {
+    if (event.target.files[0]) {
+      if (event.target.files[0].size < 5000000) {
+        const uploadFile = event.target.files[0].name;
+        const uploadType = uploadFile.split('.');
+        this.imageType = uploadType[1];
+        this.imageType = this.imageType.toLocaleLowerCase();
+        if (this.imageType.toLocaleLowerCase() === 'xlsx') {
+          this.selectedExcelFile = event.target.files[0];
+          this.selection = 'selected';
+        }
+        else if (this.imageType.toLocaleLowerCase() !== 'xlsx') {
           this.selection = '';
           this.popupRef = this.dialog.open(PopupDialogComponent, {
             disableClose: false
           });
-          this.popupRef.componentInstance.confirmMessage = "Please upload only " + ' PDF/Excel ' + ' ' + 'files';
+          this.popupRef.componentInstance.confirmMessage = "Please upload only " + ' Excel ' + ' ' + 'files';
           this.popupRef.componentInstance.id = '1';
         }
       }
@@ -119,7 +133,7 @@ export class UploadFileDialogComponent implements OnInit {
       if (data.success) {
         this.loaderService.hide();
         this.snackBar.errorPopup('Document deleted successfully.');
-        this.getEmailContentDocs();
+        // this.getEmailContentDocs();
       }
       else {
         this.loaderService.hide();
@@ -132,19 +146,43 @@ export class UploadFileDialogComponent implements OnInit {
 
   }
 
-  onDocSubmit() {
+  onPdfSubmit() {
     this.loaderService.show();
     const formData: FormData = new FormData();
     // if (this.selectedFile) {
-    formData.append('ExcelFile', JSON.stringify(this.selectedExcelFile));
-    formData.append('PdfFiles', JSON.stringify(this.selectedFile));
+    this.selectedFile.forEach(element => {
+      formData.append('PdfFiles', element);
+    });
+    formData.append('TdsId', this.tdsId);
+    this.loaderService.show();
+    this.emailService.uploadContentPdfDocs(formData).subscribe((data: any) => {
+      if (data.success) {
+        if (data.result) {
+          this.snackBar.successPopup('Document uploaded successfully', []);
+          // this.getEmailContentDocs();
+          this.ResetSelection();
+        }
+        this.loaderService.hide();
+      }
+    }, err => {
+      this.loaderService.hide();
+      this.snackBar.errorPopup('Error occurred!Please try again.')
+    });
+
+    // }
+  }
+
+  onExcelSubmit() {
+    this.loaderService.show();
+    const formData: FormData = new FormData();
+    formData.append('ExcelFile', this.selectedExcelFile);
     formData.append('TdsId', this.tdsId);
     this.loaderService.show();
     this.emailService.uploadEmailContentDocs(formData).subscribe((data: any) => {
       if (data.success) {
         if (data.result) {
           this.snackBar.successPopup('Document uploaded successfully', []);
-          this.getEmailContentDocs();
+          // this.getEmailContentDocs();
           this.ResetSelection();
         }
         this.loaderService.hide();
@@ -159,6 +197,8 @@ export class UploadFileDialogComponent implements OnInit {
 
   ResetSelection(): void {
     this.selection = '';
+    this.selectedFile=[];
+    this.availableDataSource=new MatTableDataSource();
   }
 
   openConfirmationDialog(id) {

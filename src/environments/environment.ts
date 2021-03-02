@@ -5,8 +5,9 @@
 export const environment = {
     production: false,
     hmr: false,
-
-    apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
+    // apiURL: 'https://localhost:44337/api',
+    apiURL: 'http://192.168.10.127/bmsapi/api',
+    // apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
 
     apiEndPoints: {
         login: '/TdsCertificate/Login',
@@ -14,12 +15,12 @@ export const environment = {
         getAllEmailContents: '/TdsCertificate/GetAllTdsCertificates',
         updateEmailContent: '/TdsCertificate/UpdateTdsCertificate',
 
-        uploadEmailContentDocs: '/TdsCertificate/UploadDocuments',
-        uploadEmailToUserExcel: '/TdsCertificate/TdsCertificateSendMails',
+        uploadEmailContentPdfDocs: '/TdsCertificate/UploadPDFfiles',
+        uploadEmailToUserExcel: '/TdsCertificate/UploadExcelFile',
 
-        getAllEmailUserList:'/TdsCertificate/GetAllEmailsList',
-        sendEmailToUserList:'/TdsCertificate/TdsCertificateSendMails',
-        
+        getAllEmailUserList: '/TdsCertificate/GetAllEmailsList',
+        sendEmailToUserList: '/TdsCertificate/TdsCertificateSendMails',
+
         getAllEmailDocsByType: '/TdsCertificate/getTdsEmailDocs',
         deleteEmailDocsByType: '/TdsCertificate/deleteTdsEmailDocs',
     }

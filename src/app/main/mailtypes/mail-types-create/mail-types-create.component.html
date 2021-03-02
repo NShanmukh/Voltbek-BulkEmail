@@ -3,13 +3,14 @@
     <div class="content-card" style="padding: 10px 40px;">
       <div fxLayout.xs="column" fxLayoutGap.xs="1.5%" fxLayout.gt-sm="row" fxLayoutAlign="start center"
         fxLayoutAlign.xs="start start">
-        <span fxFlex="93.5" fxFlex.sm="30" fxFlexOffset.xs="0" class="mat-title pt-0 mb-0">CREATE NEW MAIL TYPE</span>
+        <span fxFlex="93.5" fxFlex.sm="30" fxFlexOffset.xs="0" class="mat-title pt-0 mb-0"
+          style="font-weight: 800;">CREATE NEW MAIL TYPE</span>
       </div>
       <form [formGroup]="form">
         <div fxLayout="row" fxLayoutAlign="start center" class="pt-12">
           <mat-form-field appearance="outline" fxFlex="33">
             <mat-label>Title</mat-label>
-            <input matInput formControlName="tdsTitle" readonly>
+            <input matInput formControlName="tdsTitle" required>
             <mat-error *ngIf="form.get('tdsTitle').hasError('required')">
               Title is required
             </mat-error>

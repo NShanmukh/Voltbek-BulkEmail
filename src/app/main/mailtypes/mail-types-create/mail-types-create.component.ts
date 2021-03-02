@@ -22,7 +22,7 @@ export class MailTypesCreateComponent implements OnInit {
   ngOnInit() {
 
     this.form = this.fb.group({
-      tdsTitle: ['TDSMail', Validators.required],
+      tdsTitle: ['', Validators.required],
       tdsSubject: ['', Validators.required],
       tdsEmailFrom: ['', Validators.required],
       tdsEmailCc: [''],

@@ -46,9 +46,16 @@ export class EmailtypesService {
     }));
   }
 
+  uploadContentPdfDocs(body: any) {
+    return this.http.post(this.baseUrl + environment.apiEndPoints.uploadEmailContentPdfDocs, body).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.uploadEmailContentPdfDocs);
+      return data;
+    }));
+  }
+
   uploadEmailContentDocs(body: any) {
-    return this.http.post(this.baseUrl + environment.apiEndPoints.uploadEmailContentDocs, body).pipe(map(data => {
-      this.cache.delete(this.baseUrl + environment.apiEndPoints.uploadEmailContentDocs);
+    return this.http.post(this.baseUrl + environment.apiEndPoints.uploadEmailToUserExcel, body).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.uploadEmailToUserExcel);
       return data;
     }));
   }

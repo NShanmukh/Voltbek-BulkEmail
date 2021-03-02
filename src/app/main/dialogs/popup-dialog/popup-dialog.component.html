@@ -6,7 +6,8 @@
     <button mat-button (click)="dialogRef.close(false)">Cancel</button>
   </div>
 
-  <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Close</button>
-  </mat-dialog-actions>
+  <div mat-dialog-actions *ngIf="id">
+    <button mat-raised-button class="fuse-navy-700 butcolor" (click)="dialogRef.close()">Ok</button>
+  </div>
+
 </div>

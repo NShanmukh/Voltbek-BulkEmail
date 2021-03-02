@@ -57,10 +57,11 @@ export class MailTypesComponent implements OnInit {
     this.dataSource.sort = this.sort;
   }
 
-  openConfirmationDialog(recId: any) {
+  openConfirmationDialog(recId: any,fileType:string) {
     this.dialogRef = this.dialog.open(UploadFileDialogComponent, {
       disableClose: true
     });
+    this.dialogRef.componentInstance.fileType = fileType;
     this.dialogRef.componentInstance.tdsId = recId;
   }
 
