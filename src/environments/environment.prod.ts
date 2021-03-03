@@ -7,15 +7,15 @@ export const environment = {
     apiEndPoints: {
         login: '/TdsCertificate/Login',
         createNewEmailContent: '/TdsCertificate/AddNewTdsCertificate',
-        getAllEmailContents: '/TdsCertificate/GetAllTdsCertificate',
+        getAllEmailContents: '/TdsCertificate/GetAllTdsCertificates',
         updateEmailContent: '/TdsCertificate/UpdateTdsCertificate',
 
         uploadEmailContentPdfDocs: '/TdsCertificate/UploadPDFfiles',
         uploadEmailToUserExcel: '/TdsCertificate/UploadExcelFile',
 
-        getAllEmailUserList:'/TdsCertificate/GetAllEmailsList',
-        sendEmailToUserList:'/TdsCertificate/TdsCertificateSendMails',
-        
+        getAllEmailUserList: '/TdsCertificate/GetAllEmailsList',
+        sendEmailToUserList: '/TdsCertificate/TdsCertificateSendMails',
+
         getAllEmailDocsByType: '/TdsCertificate/getTdsEmailDocs',
         deleteEmailDocsByType: '/TdsCertificate/DeletePdfFile',
         deleteEmailUserRecord:'/TdsCertificate/DeleteTdsEmail'
