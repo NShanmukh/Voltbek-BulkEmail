@@ -13,4 +13,8 @@ export class FooterComponent
     constructor()
     {
     }
+
+    needHelpInfo(){
+
+    }
 }

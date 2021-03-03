@@ -41,11 +41,19 @@ export class LoginComponent implements OnInit {
       this.snackBar.errorPopup('Please fill all mandatory fields');
       return;
     }
-    if ((this.loginForm.value.userName.toLocaleLowerCase() === 'user000001' || this.loginForm.value.userName.toLocaleLowerCase()==='admin') && this.loginForm.value.password === '123456') {
+    if ((this.loginForm.value.userName.toLocaleLowerCase() === 'user000001' || this.loginForm.value.userName.toLocaleLowerCase() === 'admin') && this.loginForm.value.password === '123456') {
       this.router.navigate(["/mailTypes/mailTypes"]);
     }
-    else{
+    else {
       this.snackBar.errorPopup('Invalid credentials');
     }
+  }
+
+  onClickForgetPass() {
+
+  }
+
+  needHelpInfo() {
+
   }
 }
