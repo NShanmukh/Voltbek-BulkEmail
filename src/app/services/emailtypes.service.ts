@@ -61,8 +61,15 @@ export class EmailtypesService {
   }
 
   deleteEmailDocs(tdsId) {
-    return this.http.get(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType + '/' + tdsId).pipe(map(data => {
+    return this.http.delete(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType + '/' + tdsId).pipe(map(data => {
       this.cache.delete(this.baseUrl + environment.apiEndPoints.deleteEmailDocsByType);
+      return data;
+    }));
+  }
+
+  deleteUserMailRecord(tdsId){
+    return this.http.delete(this.baseUrl + environment.apiEndPoints.deleteEmailUserRecord + '/' + tdsId).pipe(map(data => {
+      this.cache.delete(this.baseUrl + environment.apiEndPoints.deleteEmailUserRecord);
       return data;
     }));
   }

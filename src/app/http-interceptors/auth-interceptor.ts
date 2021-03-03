@@ -15,7 +15,15 @@ export class AuthInterceptor implements HttpInterceptor {
     let authReq;
     const authToken = 'Bearer ' + this.auth.getToken();
     const boundary = Math.random().toString().substr(2);
-    if (req.url.indexOf(environment.apiEndPoints.uploadEmailContentDocs) > 0) {
+    if (req.url.indexOf(environment.apiEndPoints.uploadEmailContentPdfDocs) > 0) {
+      authReq = req.clone({
+        setHeaders: {
+          Authorization: authToken,
+          'Accept': 'application/json',
+        }
+      });
+    }
+    else if (req.url.indexOf(environment.apiEndPoints.uploadEmailToUserExcel) > 0) {
       authReq = req.clone({
         setHeaders: {
           Authorization: authToken,

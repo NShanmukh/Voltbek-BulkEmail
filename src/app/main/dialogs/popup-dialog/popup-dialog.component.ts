@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-popup-dialog',
@@ -9,8 +10,8 @@ export class PopupDialogComponent implements OnInit {
   deleteId: string;
   confirmMessage: string;
   id: string;
-  
-  constructor() { }
+  deleteType = 'Yes';
+  constructor(public dialogRef: MatDialogRef<PopupDialogComponent>) { }
 
   ngOnInit() {
   }

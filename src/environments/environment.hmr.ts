@@ -14,6 +14,7 @@ export const environment = {
         sendEmailToUserList:'/TdsCertificate/TdsCertificateSendMails',
         
         getAllEmailDocsByType: '/TdsCertificate/getTdsEmailDocs',
-        deleteEmailDocsByType: '/TdsCertificate/deleteTdsEmailDocs',
+        deleteEmailDocsByType: '/TdsCertificate/DeletePdfFile',
+        deleteEmailUserRecord:'/TdsCertificate/DeleteTdsEmail'
     }
 };

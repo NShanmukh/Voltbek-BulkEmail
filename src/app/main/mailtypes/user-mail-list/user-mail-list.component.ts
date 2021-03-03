@@ -1,7 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatDialog, MatDialogRef, MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FuseSplashScreenService } from '@fuse/services/splash-screen.service';
+import { PopupDialogComponent } from 'app/main/dialogs/popup-dialog/popup-dialog.component';
 import { EmailtypesService } from 'app/services/emailtypes.service';
 import { SnackbarService } from 'app/services/snackbar.service';
 
@@ -18,6 +19,8 @@ export class UserMailListComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  dialogRef: MatDialogRef<PopupDialogComponent>;
+
   displayedColumns = ['tdsUserName', 'tdsMailId', 'tdsPdfName', 'tdsIsMailSended', 'createdOn', 'createdBy', 'actions'];
 
   hide = false;
@@ -86,6 +89,40 @@ export class UserMailListComponent implements OnInit {
   }
 
   openConfirmationDialog(id: any) {
-
+    this.dialogRef = this.dialog.open(PopupDialogComponent, {
+      disableClose: true
+    });
+    this.dialogRef.componentInstance.deleteId = '100';
+    this.dialogRef.componentInstance.confirmMessage = 'Select the type of record to be deleted';
+    this.dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        if (result === 'Yes') {
+          this.mailService.deleteEmailDocs(id).subscribe((data: any) => {
+            if (data.success) {
+              if (data.result) {
+                this.getEmailUsersList();
+                this.snackBar.successPopup('PDF document removed successfully', []);
+              }
+            }
+            else {
+              this.snackBar.errorPopup('Error occured, please try again!');
+            }
+          });
+        }
+        else if (result === 'No') {
+          this.mailService.deleteUserMailRecord(id).subscribe((data: any) => {
+            if (data.success) {
+              if (data.result) {
+                this.getEmailUsersList();
+                this.snackBar.successPopup('User removed successfully', []);
+              }
+            }
+            else {
+              this.snackBar.errorPopup('Error occured, please try again!');
+            }
+          });
+        }
+      }
+    })
   }
 }

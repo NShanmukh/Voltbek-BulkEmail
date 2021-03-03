@@ -1,8 +1,20 @@
-<div class="p-24" [ngClass]="{'normal' : remarks === '','remarkPop':remarks !== ''  }">
+<div class="p-24" class="docWidth">
   <div mat-dialog-content>{{confirmMessage}}</div>
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <mat-radio-group fxFlex="55" [(ngModel)]="deleteType">
+      <div fxLayout="column" fxLayoutAlign="start start">
+        <div fxFlex="100" fxLayoutAlign="start start" class="mt-12">
+          <mat-radio-button value="Yes" required>Delete PDF</mat-radio-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <mat-radio-button value="No" class="radio pl-20" required>Delete User</mat-radio-button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </div>
+      </div>
 
-  <div mat-dialog-actions *ngIf="deleteId">
-    <button mat-raised-button class="fuse-navy-700 butcolor" (click)="dialogRef.close(deleteId)">Confirm</button>
+    </mat-radio-group>
+  </div>
+  <div mat-dialog-actions *ngIf="deleteId" class="pt-16">
+    <button mat-raised-button class="fuse-navy-700 butcolor" (click)="dialogRef.close(deleteType)">Confirm</button>
     <button mat-button (click)="dialogRef.close(false)">Cancel</button>
   </div>
 
