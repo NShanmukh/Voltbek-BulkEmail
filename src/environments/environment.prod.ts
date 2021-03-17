@@ -2,7 +2,8 @@ export const environment = {
     production: true,
     hmr       : false,
     
-    apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
+    // apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
+    apiURL: 'https://vsmart.voltasworld.com/bulkemailsender/api',
 
     apiEndPoints: {
         login: '/TdsCertificate/Login',

@@ -7,7 +7,8 @@ export const environment = {
     hmr: false,
     // apiURL: 'https://localhost:44337/api',
     // apiURL: 'http://192.168.10.127/bmsapi/api',
-    apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
+    // apiURL: 'https://vserveq.voltasworld.com/bulkemailsender/api',
+    apiURL: 'https://vsmart.voltasworld.com/bulkemailsender/api',
 
     apiEndPoints: {
         login: '/TdsCertificate/Login',

@@ -160,6 +160,7 @@ export class UploadFileDialogComponent implements OnInit {
         if (data.result) {
           this.snackBar.successPopup('Document uploaded successfully', []);
           // this.getEmailContentDocs();
+          this.dialogRef.close();
           this.ResetSelection();
         }
         this.loaderService.hide();
@@ -183,6 +184,7 @@ export class UploadFileDialogComponent implements OnInit {
         if (data.result) {
           this.snackBar.successPopup('Document uploaded successfully', []);
           // this.getEmailContentDocs();
+          this.dialogRef.close();
           this.ResetSelection();
         }
         this.loaderService.hide();

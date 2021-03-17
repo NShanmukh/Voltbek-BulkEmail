@@ -50,7 +50,7 @@
   </span>
   <div class="example-container mat-elevation-z4" *ngIf="availableDataSource?.filteredData?.length > 0;">
     <div style="max-height: 150px;overflow: auto;">
-      <table mat-table [dataSource]="availableDataSource" matSort class="pt-24">
+      <table mat-table [dataSource]="availableDataSource" matSort>
         <ng-container matColumnDef="Sno">
           <th style="text-align: center;" accent mat-header-cell text-bold *matHeaderCellDef>S.No.</th>
           <td style="text-align: center;" mat-cell *matCellDef="let row, let i = index;">
