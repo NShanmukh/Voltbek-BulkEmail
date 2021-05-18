@@ -23,6 +23,7 @@ export class MailTypesCreateComponent implements OnInit {
 
     this.form = this.fb.group({
       tdsTitle: ['', Validators.required],
+      IsIndividualEmailBody:[false,Validators.required],
       tdsSubject: ['', Validators.required],
       tdsEmailFrom: ['', Validators.required],
       tdsEmailCc: [null],
